@@ -1,6 +1,7 @@
 package com.example.java8.service;
 
 import com.example.java8.entity.Product;
+import com.example.java8.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,5 +15,9 @@ public interface ProductService {
 
     boolean deleteProduct(int id);
 
-    Optional<Product> getProductById(int id);
+    Product getProductById(int id);
+
+    List<Product> getByName(String name);
+
+    List<Product> findByUserId(int id);
 }

@@ -4,7 +4,6 @@ import com.example.java8.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface UserService {
@@ -15,6 +14,7 @@ public interface UserService {
 
     boolean deleteUser(int id);
 
-    Optional<User> getUserById(int id);
+    User getUserById(int id);
 
+    List<User> getByName(String name);
 }

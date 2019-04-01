@@ -1,6 +1,10 @@
 package com.example.java8.entity;
 
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -25,4 +29,7 @@ public class User {
 
     @Column
     private String email;
+
+    @Enumerated(value = EnumType.STRING)
+    private UserType userType;
 }

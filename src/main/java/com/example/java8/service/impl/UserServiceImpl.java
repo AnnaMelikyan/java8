@@ -4,10 +4,13 @@ import com.example.java8.entity.User;
 import com.example.java8.repository.UserRepository;
 import com.example.java8.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -34,21 +37,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUser(int id) {
         if (userRepository.existsById(id)){
-            Optional<User> byId = userRepository.findById(id);
-            if (byId.isPresent()){
-                userRepository.delete(byId.get());
-                return true;
-            }
+            userRepository.findById(id).ifPresent(userRepository::delete);
+            return true;
         }
         return false;
     }
 
     @Override
-    public Optional<User> getUserById(int id) {
-        Optional<User> byId = userRepository.findById(id);
-        if (byId.isPresent()){
-            return byId;
-        }
-        return null;
+    public User getUserById(int id) {
+        return userRepository.findById(id).orElse(null);
+
+    }
+
+    @Override
+    public List<User> getByName(String name) {
+        return userRepository.findAll().stream().filter(product -> product.getName().equals(name)).collect(Collectors.toList());
+
     }
 }
